@@ -1,0 +1,11 @@
+Loan Application Aproval App
+----------------------------------
+
+	Create Table Loan - loanid, loantype, maxlimit
+	Create Table Customer - custid, custname, location, Fkloanid, requested_amt, status
+
+	Note: default value of status column keep "Applied"
+
+	Q1. Create "Loan" and "Customer" entity in entity package
+	Q2. Create "LoanTransaction" and "CustomerTransaction" in entity package
+	Q3. in MainApp.java, handle CRUD Operations on Loan and Customer.
