@@ -172,7 +172,7 @@ class Solution {
         // (left_height + right_height + 1) for each node 
         a.ans = Math.max(a.ans, 1 + left_height +right_height); 
     
-        return 1 + Math.max(left_height, right_height);  //this is to return max height which is considered as final hright of tree
+        return 1 + Math.max(left_height, right_height);  //this is to return max height which is considered as final hright of tree for a given node
     } 
     
     /* Computes the diameter of binary 
