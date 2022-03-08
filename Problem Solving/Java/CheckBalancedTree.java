@@ -213,7 +213,7 @@ class Tree
 
         if (Math.abs(lh - rh) <= 1
             && isBalanced(root.left)
-            && isBalanced(root.right))
+            && isBalanced(root.right)) //isBalanced checks at every node by considering every node as root to process further
             return true;
 
         /* If we reach here then tree is not height-balanced */
