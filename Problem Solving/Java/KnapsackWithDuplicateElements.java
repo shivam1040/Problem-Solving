@@ -99,13 +99,13 @@ class Solution{
     static int rec(int N, int W, int val[], int wt[], int dp[][]){
         if(N==0 || W==0)
             return 0;
-        if(dp[N][W]!=0)
+        if(dp[N][W]!=0) //memoization
             return dp[N][W];
         if(wt[N-1]<=W){ //in this type of knapsack problem, there are two choices one; we can take duplicates so that means one index can be processes over and over until weight goes zero, and second; not take the index and process other indexes, by making a recursive call for both these choices we can find max of both the choices and memoize it and return a final answer at N, W
             return dp[N][W]=Math.max((val[N-1]+rec(N, W-wt[N-1], val, wt, dp)), rec(N-1, W, val, wt, dp));
         }
         else if(wt[N-1]>W) //if weight goes above limit, then just process next element
             return dp[N][W]=rec(N-1, W, val, wt, dp);
-            return dp[N][W];
+        return dp[N][W];
     }
     }
