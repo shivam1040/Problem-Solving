@@ -1,86 +1,77 @@
 /*
-Given a string str and another string patt. Find the minimum index of the character in str that is also present in patt.
-
+Given a string S and another string patt. Find the character in patt that is present at the minimum index in S.
+ 
 
 Example 1:
 
-Input:
-str = geeksforgeeks
-patt = set
-Output: 1
-Explanation: e is the character which is
-present in given str "geeksforgeeks"
-and is also presen in patt "set". Minimum
-index of e is 1. 
+Input: S = "zsyle", patt = "bjz"
+Output: "z"
 Example 2:
 
-Input:
-str = adcffaet
-patt = onkl
-Output: -1
-Explanation: There are none of the
-characters which is common in patt
-and str.
+Input: S = "anskg", patt = "me"
+Output: "$"
+ 
 
 Your Task:
-You only need to complete the function minIndexChar() that returns the index of answer in str or returns -1 in case no character of patt is present in str.
+You don't need to read or print anything. Your task is to complete the function printMinIndexChar() which takes S and patt as input parameter and returns the character in patt that is present at the minimum index in S. If not possible returns "$".
+ 
 
-
-Expected Time Complexity: O(N).
-Expected Auxiliary Space: O(Number of distinct characters).
-
+Expected Time Complexity: O(max(|str|, |patt|))
+Expected Auxilary Space: O(K) where K <= 26
+ 
 
 Constraints:
-1 ≤ |str|,|patt| ≤ 105 
-'a' <= stri, patti <= 'z'
+1 ≤ |S|, |patt| ≤ 104
 */
 
-// { Driver Code Starts
-    import java.util.*;
-    import java.lang.*;
-    import java.io.*;
-    
-    
-     // } Driver Code Ends
-    //User function template for JAVA
-    
-    class Solution
+//{ Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+{
+    public static void main(String[] args) throws IOException
     {
-        //Function to find the minimum indexed character.
-        public static int minIndexChar(String str, String patt)
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine().trim());
+        while(T-->0)
         {
-            Map<Character, Integer> aux=new HashMap<Character, Integer>();
-            for(int i=0; i<str.length(); i++){
-                if(!aux.containsKey(str.charAt(i)))
-                    aux.put(str.charAt(i), i);
-            }
-            int min=Integer.MAX_VALUE;
-            for(int i=0; i<patt.length(); i++)
-                if(aux.containsKey(patt.charAt(i))){
-                    if(aux.get(patt.charAt(i))<min)
-                        min=aux.get(patt.charAt(i));
-                }
-            return min==Integer.MAX_VALUE ? -1 : min;
+            String str = br.readLine().trim();
+            String patt = br.readLine().trim();
+            Solution obj = new Solution();
+            System.out.println(obj.printMinIndexChar(str, patt));
         }
     }
+}
+// } Driver Code Ends
+
+
+class Solution{
     
-    // { Driver Code Starts.
-    
-    class GFG {
-        public static void main (String[] args) 
-        {
-            Scanner sc=new Scanner(System.in);
-            int t=sc.nextInt();
-            while(t>0)
-            {
-                t--;
-                
-                String s1=sc.next();
-                String s2=sc.next();
-                
-                int res = new Solution().minIndexChar(s1, s2);
-                System.out.println(res);
+    // Function to find the character in patt which is present in str at min index
+    public static String printMinIndexChar(String S, String patt){
+        
+        // Your code here
+        
+        // you don't need to print anything
+        Map<Character, Integer> aux=new HashMap<>();
+        int min=Integer.MAX_VALUE;
+        String res="$";
+        
+        for(int i=0; i<S.length(); i++){
+            char c=S.charAt(i);
+            if(!aux.containsKey(c))
+                aux.put(c, i);
+        }
+        for(int i=0; i<patt.length(); i++){
+            char c=patt.charAt(i);
+            if(aux.containsKey(c) && aux.get(c)<min){
+                min=aux.get(c);
+                res=String.valueOf(c);
             }
         }
+        return res;
     }
-      // } Driver Code Ends
+    
+}
+
