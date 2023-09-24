@@ -1,4 +1,4 @@
-/*
+    /*
 Given two strings A and B, find if A is a subsequence of B.
 
 Example 1:
