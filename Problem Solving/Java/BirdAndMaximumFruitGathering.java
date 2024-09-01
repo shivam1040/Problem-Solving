@@ -1,7 +1,7 @@
 /*
-There are N trees in a circle. Each tree has a fruit value associated with it. A bird has to sit on a tree for 0.5 sec to gather all the fruits present on the tree and then the bird can move to a neighboring tree. It takes the bird 0.5 seconds to move from one tree to another. Once all the fruits are picked from a particular tree, she can’t pick any more fruits from that tree. The maximum number of fruits she can gather is infinite.
+There are N trees in a circle. Each tree has a fruit value associated with it. A bird has to sit on a tree for 0.5 sec to gather all the fruits present on the tree and then the bird can move to a neighboring tree. It takes the bird 0.5 seconds to move from one tree to another. Once all the fruits are picked from a particular tree, she cant pick any more fruits from that tree. The maximum number of fruits she can gather is infinite.
 
-Given N and M (the total number of seconds the bird has), and the fruit values of the trees. Maximize the total fruit value that the bird can gather. The bird can start from any tree.
+Given N and M (the total number of seconds the bird has), and an array arr[] containing the fruit values of the trees. Maximize the total fruit value that the bird can gather. The bird can start from any tree.
 
  
 
@@ -45,8 +45,21 @@ Expected Auxiliary Space: O(1).
 
 Constraints:
 2 ≤ N ≤ 106
+*/
 
+/*
 
+The provided code seems to be an implementation of a sliding window approach to solve the problem. It maintains a window of size m (the total number of seconds the bird has) and slides it over the array arr to maximize the total fruit value that the bird can gather.
+
+Here's a breakdown of the code:
+
+Initialize ans and sum to 0.
+Calculate the initial sum of the first m elements of arr and store it in sum.
+Set ans to the initial sum.
+Iterate over the array from index m to n + m - 1 (using modulo n for cyclic traversal).
+Update ans by adding the current element and subtracting the element that is m positions behind the current element (again, using modulo n).
+Update sum to be the maximum of sum and ans.
+Return sum, which contains the maximum total fruit value that the bird can gather.
 */
 
 //{ Driver Code Starts
@@ -67,30 +80,19 @@ class Solution
 {
     long maxFruits(long arr[] ,int n,int m)
     {
-        long sum=0, res=0;
-        int i=0;
+        int ans=0, sum=0;
         
-        //calculating sum until window m, since time taken for moving form one ele to another is .5+.5
-        for(; i<m; i++)
+        for(int i=0; i<m; i++)
             sum+=arr[i];
-        
-        res=Math.max(sum, res);
-        //if fruit value is equal to number of elements then just return it
-        if(i==n)
-            return res;
-        
-        //this code takes care of tree in a circle constraint, so basically with the intial window sum we traverse the array in a circular fashion and come back to the intial m indexed element. this way we find the maximum subarray sum in circular fashion 
-        for(int j=0; j<n; j++){
-            sum=(sum-arr[j])+arr[i];
-            res=Math.max(sum, res);
-            //this takes care of not overflowing the index out of array and maintain circularity
-            i=(i+1)%n;
+        ans=sum;
+        //Iterate over the array from index m to n + m - 1 (using modulo n for cyclic traversal)
+        for(int i=m; i<n+m; i++){
+            ans+=arr[i%n]-arr[(i-m)%n];
+            sum=Math.max(sum, ans);
         }
-        
-        return res;
+        return sum;
     }
 }
-
 
 //{ Driver Code Starts.
 
